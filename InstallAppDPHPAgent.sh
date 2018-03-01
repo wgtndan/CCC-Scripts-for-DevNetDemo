@@ -26,7 +26,7 @@ echo "Downloading the AppDynamics App Agent..."
 cd /tmp/
 mkdir appd-php
 cd /tmp/appd-php
-wget -O appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2 http://10.68.116.159/appd/appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2; touch /tmp/appd-agent/downloadagent.done &
+wget -O appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2 http://10.68.116.159/appd/appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2; touch /tmp/appd-php/downloadagent.done &
 
 #Check if download is done then proceed to unzip the agent package
 while [ ! -f /tmp/appd-php/downloadagent.done ]
