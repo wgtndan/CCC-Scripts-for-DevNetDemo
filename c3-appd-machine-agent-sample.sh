@@ -21,7 +21,7 @@ cd /tmp/
 mkdir appd-agent
 cd /tmp/appd-agent
 
-wget https://download.appdynamics.com/download/prox/download-file/machine/4.4.1.570/appdynamics-machine-agent-4.4.1.570.x86_64.rpm; touch /tmp/appd-agent/downloadagent.done &
+wget  -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ https://download.appdynamics.com/download/prox/download-file/machine/4.4.1.570/appdynamics-machine-agent-4.4.1.570.x86_64.rpm; touch /tmp/appd-agent/downloadagent.done &
 
 #Check if download is done then proceed to unzip the agent package
 while [ ! -f /tmp/appd-agent/downloadagent.done ]
