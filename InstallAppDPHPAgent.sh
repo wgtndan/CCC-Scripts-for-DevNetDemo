@@ -19,7 +19,7 @@ set -e
 set -o pipefail
 
 # Add Host file entry for appd-controller
-sudo echo '<IP>	appd-controller' | sudo tee --append /etc/hosts > /dev/null
+# sudo echo '<IP>	appd-controller' | sudo tee --append /etc/hosts > /dev/null
 
 #Downloading the AppD Agent
 echo "Downloading the AppDynamics App Agent..."
