@@ -21,7 +21,7 @@ cd /tmp/
 mkdir appd-nginx-agent
 cd /tmp/appd-nginx-agent
 
-wget -O nginx-monitoring-extension-1.1.9.zip http://10.68.116.159/appd/nginx-monitoring-extension-1.1.9.zip; touch /tmp/appd-agent/downloadagent.done &
+wget -O nginx-monitoring-extension-1.1.9.zip http://10.68.116.159/appd/nginx-monitoring-extension-1.1.9.zip; touch /tmp/appd-nginx-agent/downloadagent.done &
 
 #Check if download is done then proceed to unzip the agent package
 while [ ! -f /tmp/appd-nginx-agent/downloadagent.done ]
@@ -50,7 +50,7 @@ service appdynamics-machine-agent restart
 
 # Clean up the temporary file and the agent package file
 echo "Cleaning files... AppDynamics Machine Agent..."
-rm -rf /tmp/appd-agent/downloadagent.done
-rm -rf /tmp/appd-agent/nginx-monitoring-extension-1.1.9.zip
+rm -rf /tmp/appd-nginx-agent/downloadagent.done
+rm -rf /tmp/appd-nginx-agent/nginx-monitoring-extension-1.1.9.zip
 
 echo "AppDynamics Machine Agent Installation...done!"

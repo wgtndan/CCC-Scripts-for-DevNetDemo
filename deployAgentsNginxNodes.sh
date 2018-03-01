@@ -5,5 +5,5 @@ wget -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ -O - htt
 
 
 #Deploy NGINX Agent
-sudo wget -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ -O - https://raw.githubusercontent.com/wgtndan/CCC-Scripts-for-DevNetDemo/master/installAppsNginxAgent.sh | sudo bash
+wget -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ -O - https://raw.githubusercontent.com/wgtndan/CCC-Scripts-for-DevNetDemo/master/installAppDNginxAgent.sh | sudo bash
 
