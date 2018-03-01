@@ -13,7 +13,7 @@ set -e
 set -o pipefail
 
 # Add Host file entry for appd-controller if DNS entry not configured
-echo '<IP>	appd-controller' | tee --append /etc/hosts > /dev/null
+#echo '<IP>	appd-controller' | tee --append /etc/hosts > /dev/null
 
 #Downloading the AppD Agent
 echo "Downloading the AppDynamics Machine Agent..."
