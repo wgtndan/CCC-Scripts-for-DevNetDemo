@@ -5,7 +5,7 @@ APPD_CONTROLLER="10.68.116.252"
 APPD_CONTROLLER_PORT="8090"
 APPD_CONTROLLER_SSL_ENABLED=""
 APPD_ACCESS_KEY="b3752e96-3971-4c62-8540-dafc1175e2d7"
-APPD_ACCOUNT_NAME="customer1_ac5fd604-6535-4711-94e6-e43f16d63f87"
+APPD_ACCOUNT_NAME=""
 DEPLOYMENT_NAME="Machines"
 APP_NAME="devnet-opencart"
 TIER_NAME="opencartApp"
@@ -26,7 +26,8 @@ echo "Downloading the AppDynamics App Agent..."
 cd /tmp/
 mkdir appd-php
 cd /tmp/appd-php
-wget -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ ${AGENT_LOCATION}/php-agent/composite-app/appdynamics-php-agent-x64-linux-4.3.5.0.tar.bz2; touch /tmp/appd-agent/downloadagent.done &
+# wget ${AGENT_LOCATION}/php-agent/composite-app/appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2; touch /tmp/appd-agent/downloadagent.done &
+scp -p C1sco12345 appd@10.68.116.252:/tmp/appdAgents/appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2 .
 
 #Check if download is done then proceed to unzip the agent package
 while [ ! -f /tmp/appd-php/downloadagent.done ]
@@ -36,10 +37,10 @@ done
 
 # Install the AppD Agent
 echo "Installing the AppDynamics App Agent..."
-tar -xvjf appdynamics-php-agent-x64-linux-4.3.5.0.tar.bz2
-cd appdynamics-php-agent
+tar -xvjf appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2
+cd appdynamics-php-agent-linux_x64
 chmod 777 logs/
-sudo ./install.sh -s -a=${APPD_ACCOUNT_NAME}@${APPD_ACCESS_KEY} $APPD_CONTROLLER $APPD_CONTROLLER_PORT $APP_NAME $TIER_NAME $cliqrNodeHostname
+sudo ./install.sh -a=${APPD_ACCOUNT_NAME}@${APPD_ACCESS_KEY} $APPD_CONTROLLER $APPD_CONTROLLER_PORT $APP_NAME $TIER_NAME $cliqrNodeHostname
 
 # Restart apache httpd
 echo "Restarting HTTP Service..."
@@ -49,6 +50,6 @@ sudo service httpd restart
 # Clean up the temporary file and the agent package file
 echo "Cleaning files... AppDynamics App Agent..."
 rm -rf /tmp/appd-php/downloadagent.done
-rm -rf /tmp/appd-php/appdynamics-php-agent-x64-linux-4.3.5.0.tar.bz2
+rm -rf /tmp/appd-php/appdynamics-php-agent-x64-linux-4.4.1.343.tar.bz2
 
 agentSendLogMessage "Installing AppDynamics Agent...done"

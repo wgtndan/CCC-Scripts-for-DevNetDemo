@@ -21,7 +21,7 @@ cd /tmp/
 mkdir appd-agent
 cd /tmp/appd-agent
 
-wget  -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ https://download.appdynamics.com/download/prox/download-file/machine/4.4.1.570/appdynamics-machine-agent-4.4.1.570.x86_64.rpm; touch /tmp/appd-agent/downloadagent.done &
+wget -O appdynamics-machine-agent-4.4.1.570.x86_64.rpm -e use_proxy=yes -e https_proxy=http://sngidc-dmz-wsa-1.cisco.com/ https://download.appdynamics.com/download/prox/download-file/machine/4.4.1.570/appdynamics-machine-agent-4.4.1.570.x86_64.rpm; touch /tmp/appd-agent/downloadagent.done &
 
 #Check if download is done then proceed to unzip the agent package
 while [ ! -f /tmp/appd-agent/downloadagent.done ]
@@ -32,13 +32,12 @@ done
 
 # Install the AppD Agent
 echo "Installing the AppDynamics Machine Agent..."
-rpm -ivh appdynamics-machine-agent-4.4.1.570.x86_64.rpm
+sudo rpm -ivh appdynamics-machine-agent-4.4.1.570.x86_64.rpm
 echo "Configuring the AppDynamics Machine Agent..."
 sed -i.bkp -e "s%<controller-host>%<controller-host>${APPD_CONTROLLER}%g" \
 -e "s%<controller-port>%<controller-port>${APPD_CONTROLLER_PORT}%g" \
 -e "s%<account-access-key>%<account-access-key>${APPD_ACCESS_KEY}%g" \
 -e "s%<controller-ssl-enabled>%<controller-ssl-enabled>${APPD_CONTROLLER_SSL_ENABLED}%g" \
--e "s%<account-name>%<account-name>${APPD_ACCOUNT_NAME}%g" \
 -e "s%<sim-enabled>false%<sim-enabled>true%g" \
 -e "s%</controller-info>%<application-name>${DEPLOYMENT_NAME}</application-name></controller-info>%g" \
 /opt/appdynamics/machine-agent/conf/controller-info.xml
