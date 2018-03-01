@@ -17,6 +17,7 @@ set -o pipefail
 
 #Downloading the AppD Agent
 echo "Downloading the AppDynamics Machine Agent..."
+sudo rm -Rf /tmp/appd-agent/
 cd /tmp/
 mkdir appd-agent
 cd /tmp/appd-agent
@@ -37,7 +38,6 @@ echo "Configuring the AppDynamics Machine Agent..."
 sed -i.bkp -e "s%<controller-host>%<controller-host>${APPD_CONTROLLER}%g" \
 -e "s%<controller-port>%<controller-port>${APPD_CONTROLLER_PORT}%g" \
 -e "s%<account-access-key>%<account-access-key>${APPD_ACCESS_KEY}%g" \
--e "s%<controller-ssl-enabled>%<controller-ssl-enabled>${APPD_CONTROLLER_SSL_ENABLED}%g" \
 -e "s%<sim-enabled>false%<sim-enabled>true%g" \
 -e "s%</controller-info>%<application-name>${DEPLOYMENT_NAME}</application-name></controller-info>%g" \
 /opt/appdynamics/machine-agent/conf/controller-info.xml
